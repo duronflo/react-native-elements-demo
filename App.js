@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,View } from 'react-native';
 
 import { Platform } from 'react-native';
-import { Button, lightColors, darkColors, Switch, createTheme, ThemeProvider, useThemeMode, useTheme } from '@rneui/themed';
+import { Button, lightColors, darkColors, Switch, createTheme, ThemeProvider, useThemeMode, useTheme, Text } from '@rneui/themed';
 import { useState } from 'react';
 
 const theme = createTheme({
   lightColors: {
-    primary: 'green',
+    ...lightColors
   },
   darkColors: {
-    primary: 'green',
+    ...darkColors
   },
   mode: 'light' | 'dark',
   components: {
@@ -23,10 +23,11 @@ const theme = createTheme({
 
 const SwitchNew = () => {
   const { mode, setMode } = useThemeMode();
+  const {isSet, setSwitch} = useState(false)
 
   return (
     <Switch
-      value={() => mode === 'dark' ? false : true}
+      value={isSet}
       onValueChange={() => {
 
         mode === 'dark' ? setMode('light') : setMode('dark');
